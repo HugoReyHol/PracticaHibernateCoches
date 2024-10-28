@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS cocheshibernate;
+CREATE DATABASE  cocheshibernate;
+USE cocheshibernate;
+
+CREATE TABLE coches(
+  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  matricula VARCHAR(50) NOT NULL,
+  marca VARCHAR(20) NOT NULL,
+  modelo VARCHAR(20) NOT NULL,
+  tipo VARCHAR(20) NOT NULL
+ 
+);
