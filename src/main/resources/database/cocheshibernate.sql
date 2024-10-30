@@ -7,6 +7,7 @@ CREATE TABLE Coche(
   matricula VARCHAR(50) NOT NULL UNIQUE,
   marca VARCHAR(20) NOT NULL,
   modelo VARCHAR(20) NOT NULL,
-  tipo VARCHAR(20) NOT NULL
+  tipo VARCHAR(20) NOT NULL,
+  CONSTRAINT chk_matricula CHECK (matricula REGEXP '^[0-9]{4}[A-Z]{3}$')
  
 );

@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CocheDAOImpl implements CocheDAO{
+public class CocheDAOImpl implements CocheDAO {
 
     public boolean guardarCoche(Coche coche, Session session) {
         Transaction transaction = null;
 
-        try{
+        try {
             transaction = session.beginTransaction();
             session.save(coche);
             transaction.commit();
 
         } catch (Exception e) {
-            if(transaction != null)
-                transaction.rollback();
+            if (transaction != null) transaction.rollback();
 
             AlertUtil.mostrarError(e.getCause().getMessage());
 
@@ -34,14 +33,13 @@ public class CocheDAOImpl implements CocheDAO{
     public void actualizarCoche(Coche coche, Session session) {
         Transaction transaction = null;
 
-        try{
+        try {
             transaction = session.beginTransaction();
             session.saveOrUpdate(coche);
             transaction.commit();
 
         } catch (Exception e) {
-            if(transaction != null)
-                transaction.rollback();
+            if (transaction != null) transaction.rollback();
 
             AlertUtil.mostrarError(e.getCause().getMessage());
 
@@ -58,8 +56,7 @@ public class CocheDAOImpl implements CocheDAO{
             transaction.commit();
 
         } catch (Exception e) {
-            if(transaction != null)
-                transaction.rollback();
+            if (transaction != null) transaction.rollback();
 
         }
     }
@@ -75,8 +72,7 @@ public class CocheDAOImpl implements CocheDAO{
             transaction.commit();
 
         } catch (Exception e) {
-            if(transaction != null)
-                transaction.rollback();
+            if (transaction != null) transaction.rollback();
         }
 
         return coches;

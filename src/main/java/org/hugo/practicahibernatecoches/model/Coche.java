@@ -1,7 +1,7 @@
 package org.hugo.practicahibernatecoches.model;
 
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Coche")
@@ -31,16 +31,16 @@ public class Coche {
         return matricula;
     }
 
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
     }
 
     public String getMarca() {
