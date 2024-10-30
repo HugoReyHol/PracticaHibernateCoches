@@ -92,6 +92,7 @@ public class MenuCtrll implements Initializable {
         cocheCargado = c;
 
         coches.add(c);
+        tablaCoches.getSelectionModel().select(c);
 
     }
 
@@ -109,6 +110,8 @@ public class MenuCtrll implements Initializable {
             AlertUtil.mostrarInfo("Esa matricula ya está asignada");
 
         }
+
+        tablaCoches.refresh();
     }
 
     public void onEliminar(ActionEvent actionEvent) {

@@ -68,7 +68,7 @@ public class CocheDAOImpl implements CocheDAO{
 
         try {
             transaction = session.beginTransaction();
-            coches = session.createQuery("from coches").list();
+            coches = session.createQuery("from Coche").list();
             transaction.commit();
 
         } catch (Exception e) {
