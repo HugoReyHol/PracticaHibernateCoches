@@ -1,6 +1,5 @@
 package org.hugo.practicahibernatecoches.controller;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hugo.practicahibernatecoches.dao.CocheDAOImpl;
 import org.hugo.practicahibernatecoches.model.Coche;
-import org.hugo.practicahibernatecoches.util.AlertUtil;
 import org.hugo.practicahibernatecoches.util.HibernateUtil;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,10 +41,10 @@ public class MenuCtrll implements Initializable {
 
     private Coche cocheCargado = null;
 
-    private CocheDAOImpl cocheDAO = new CocheDAOImpl();
+    private final CocheDAOImpl cocheDAO = new CocheDAOImpl();
 
-    private SessionFactory factory = HibernateUtil.getSessionFactory();
-    private Session session = HibernateUtil.getSession();
+    private final SessionFactory factory = HibernateUtil.getSessionFactory();
+    private final Session session = HibernateUtil.getSession();
 
 
     @Override
@@ -79,15 +77,10 @@ public class MenuCtrll implements Initializable {
     public void onGuardar(ActionEvent actionEvent) {
         Coche c = new Coche();
 
-        c.setMarca(inMarca.getText());
-        c.setMatricula(inMatricula.getText());
-        c.setModelo(inModelo.getText());
-        c.setTipo(inTipo.getValue());
+        comprobarEntrada(c);
 
-        if (!cocheDAO.guardarCoche(c, session)) {
-            AlertUtil.mostrarInfo("Esa matricula ya está asignada");
-            return;
-        }
+        if (!cocheDAO.guardarCoche(c, session)) return;
+
 
         cocheCargado = c;
 
@@ -101,15 +94,9 @@ public class MenuCtrll implements Initializable {
             return;
         }
 
-        cocheCargado.setMarca(inMarca.getText());
-        cocheCargado.setMatricula(inMatricula.getText());
-        cocheCargado.setModelo(inModelo.getText());
-        cocheCargado.setTipo(inTipo.getValue());
+        comprobarEntrada(cocheCargado);
 
-        if (!cocheDAO.actualizarCoche(cocheCargado, session)) {
-            AlertUtil.mostrarInfo("Esa matricula ya está asignada");
-
-        }
+        cocheDAO.actualizarCoche(cocheCargado, session);
 
         tablaCoches.refresh();
     }
@@ -151,6 +138,14 @@ public class MenuCtrll implements Initializable {
 
         session.close();
         factory.close();
+
+    }
+
+    private void comprobarEntrada(Coche c) {
+        c.setMarca(inMarca.getText().isEmpty() ? null : inMarca.getText());
+        c.setMatricula(inMatricula.getText().isEmpty() ? null : inMatricula.getText());
+        c.setModelo(inModelo.getText().isEmpty() ? null : inModelo.getText());
+        c.setTipo(inTipo.getValue());
 
     }
 }

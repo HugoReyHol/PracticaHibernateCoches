@@ -9,7 +9,7 @@ public interface CocheDAO {
 
     boolean guardarCoche(Coche coche, Session session);
 
-    boolean actualizarCoche(Coche coche, Session session);
+    void actualizarCoche(Coche coche, Session session);
 
     void eliminarCoche(Coche coche, Session session);
 

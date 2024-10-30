@@ -3,6 +3,8 @@ package org.hugo.practicahibernatecoches.dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hugo.practicahibernatecoches.model.Coche;
+import org.hugo.practicahibernatecoches.util.AlertUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +22,16 @@ public class CocheDAOImpl implements CocheDAO{
         } catch (Exception e) {
             if(transaction != null)
                 transaction.rollback();
-            return false;
 
+            AlertUtil.mostrarError(e.getCause().getMessage());
+
+            return false;
         }
 
         return true;
     }
 
-    public boolean actualizarCoche(Coche coche, Session session) {
+    public void actualizarCoche(Coche coche, Session session) {
         Transaction transaction = null;
 
         try{
@@ -38,11 +42,10 @@ public class CocheDAOImpl implements CocheDAO{
         } catch (Exception e) {
             if(transaction != null)
                 transaction.rollback();
-            return false;
+
+            AlertUtil.mostrarError(e.getCause().getMessage());
 
         }
-
-        return true;
     }
 
     public void eliminarCoche(Coche coche, Session session) {
@@ -75,7 +78,6 @@ public class CocheDAOImpl implements CocheDAO{
             if(transaction != null)
                 transaction.rollback();
         }
-
 
         return coches;
     }
